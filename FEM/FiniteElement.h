@@ -10,13 +10,14 @@ public:
     std::vector<Node> nodes;
     int element_id;
 
-    std::vector<std::vector<double>> local_A;
-    std::vector<std::vector<double>> local_B;
-    std::vector<double> local_f;
+    double** local_C = NULL;
+    double** local_K = NULL;
+    double* local_f = NULL;
 
-    std::vector<std::vector<double>> calculate_local_A();
-    std::vector<std::vector<double>> calculate_local_B();
-    std::vector<double> calculate_local_f();
+    double** calculate_local_C();
+    double** calculate_local_K();
+    double* calculate_local_f();
+    double calculate_volume();
     void Print();
 
     static void PrintElements(std::vector<FiniteElement>);

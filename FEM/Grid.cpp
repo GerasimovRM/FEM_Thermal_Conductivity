@@ -6,22 +6,22 @@ Grid::Grid(std::vector<FiniteElement> elements)
     this->elements = elements;
     
 
-    this->global_A.resize(GlobalData::count_nodes);
-    for (int i = 0; i < this->global_A.size(); ++i)
-        this->global_A[i].resize(GlobalData::count_nodes);
+    this->global_C.resize(GlobalData::count_nodes);
+    for (int i = 0; i < this->global_C.size(); ++i)
+        this->global_C[i].resize(GlobalData::count_nodes);
 
-    for (int i = 0; i < this->global_A.size(); ++i)
-        for (int j = 0; j < this->global_A[i].size(); ++j)
-            global_A[i][j] = 0;
+    for (int i = 0; i < this->global_C.size(); ++i)
+        for (int j = 0; j < this->global_C[i].size(); ++j)
+            global_C[i][j] = 0;
     
 
-    this->global_B.resize(GlobalData::count_nodes);
-    for (int i = 0; i < this->global_B.size(); ++i)
-        this->global_B[i].resize(GlobalData::count_nodes);
+    this->global_K.resize(GlobalData::count_nodes);
+    for (int i = 0; i < this->global_K.size(); ++i)
+        this->global_K[i].resize(GlobalData::count_nodes);
     
-    for (int i = 0; i < this->global_B.size(); ++i)
-        for (int j = 0; j < this->global_B[i].size(); ++j)
-            global_B[i][j] = 0;
+    for (int i = 0; i < this->global_K.size(); ++i)
+        for (int j = 0; j < this->global_K[i].size(); ++j)
+            global_K[i][j] = 0;
 
 
     this->global_f.resize(GlobalData::count_nodes);
@@ -30,7 +30,7 @@ Grid::Grid(std::vector<FiniteElement> elements)
         global_f[i] = 0;
 }
 
-void Grid::calculate_global_A()
+void Grid::calculate_global_C()
 {
     //for (int k = 0; k < this->elements.size(); ++k)
         //for (int j = 0; j < )
