@@ -22,6 +22,8 @@ int GlobalData::count_y_elements;
 int GlobalData::count_z_elements;
 int GlobalData::count_elements;
 
+double** GlobalData::lambda;
+
 GlobalData::GlobalData()
 {
     time_step = 0.01;
@@ -45,5 +47,16 @@ GlobalData::GlobalData()
     count_y_elements = count_y_elements * 2;
     count_z_elements = count_z_elements * 2;
     count_elements = count_elements_sq * 2;
+
+    lambda = new double* [3];
+    for (int i = 0; i < 3; ++i)
+    {
+        lambda[i] = new double[3];
+        for (int j = 0; j < 3; ++j)
+            lambda[i][j] = 0;
+    }
+    lambda[0][0] = 10;
+    lambda[1][1] = 10;
+    lambda[2][2] = 10;
 
 }

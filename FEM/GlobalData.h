@@ -24,6 +24,8 @@ public:
     static int count_z_elements;
     static int count_elements;
 
+    static double** lambda;
+
     GlobalData();
 };
 

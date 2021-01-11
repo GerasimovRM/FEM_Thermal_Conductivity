@@ -3,28 +3,65 @@
 
 #include "FiniteElement.h"
 #include "GlobalData.h"
+#include "Common.h"
 
 
-double** FiniteElement::calculate_local_C()
+void FiniteElement::calculate_local_C()
 {
+    double volume = this->calculate_volume();
+
     if (this->local_C == NULL)
     {
         this->local_C = new double* [4];
         for (int i = 0; i < 4; ++i)
             local_C[i] = new double [4];
     }
-    /// TODO:
+    for (int i = 0; i < 4; ++i)
+        for (int j = 0; j < 4; ++j)
+        {
+            local_C[i][j] = GlobalData::c * GlobalData::rho * volume / 20.;
+            if (i == j)
+                local_C[i][j] *= 2;
+        }
 }
 
 
-double** FiniteElement::calculate_local_K()
+void FiniteElement::calculate_local_K()
 {
+    double b0 = (nodes[1].y - nodes[3].y) * (nodes[2].z - nodes[3].z) - (nodes[2].y - nodes[3].y) * (nodes[1].z - nodes[3].z);
+    double b1 = (nodes[2].y - nodes[3].y) * (nodes[0].z - nodes[3].z) - (nodes[0].y - nodes[3].y) * (nodes[2].z - nodes[3].z);
+    double b2 = (nodes[0].y - nodes[3].y) * (nodes[1].z - nodes[3].z) - (nodes[1].y - nodes[3].y) * (nodes[0].z - nodes[3].z);
+    double b3 = b0 + b1 + b2;
+
+    double c0 = (nodes[2].x - nodes[3].x) * (nodes[1].z - nodes[3].z) - (nodes[1].x - nodes[3].x) * (nodes[2].z - nodes[3].z);
+    double c1 = (nodes[0].x - nodes[3].x) * (nodes[2].z - nodes[3].z) - (nodes[2].x - nodes[3].x) * (nodes[0].z - nodes[3].z);
+    double c2 = (nodes[1].x - nodes[3].x) * (nodes[0].z - nodes[3].z) - (nodes[0].x - nodes[3].x) * (nodes[1].z - nodes[3].z);
+    double c3 = -(c0 + c1 + c2);
+
+    double d0 = (nodes[1].x - nodes[3].x) * (nodes[2].y - nodes[3].y) - (nodes[2].x - nodes[3].x) * (nodes[2].y - nodes[3].y);
+    double d1 = (nodes[2].x - nodes[3].x) * (nodes[0].y - nodes[3].y) - (nodes[0].x - nodes[3].x) * (nodes[2].y - nodes[3].y);
+    double d2 = (nodes[0].x - nodes[3].x) * (nodes[1].y - nodes[3].y) - (nodes[1].x - nodes[3].x) * (nodes[0].y - nodes[3].y);
+    double d3 = -(d0 + d1 + d2);
+
+    
+    std::vector<std::vector<double>> B_vec = {
+        {b0, b1, b2, b3},
+        {c0, c1, c2, c3},
+        {d0, d1, d2, d3}
+    };
+    
+
+    double** B = Common::vector_to_array(B_vec);
+    double** B_trans = Common::matrix_transpose(B, 3, 4);
+    double** B_trans_D = Common::matrix_product(B_trans, 4, 3, GlobalData::lambda, 3, 3);
+    this->local_K = Common::matrix_product(B_trans_D, 4, 3, B, 3, 4);
 
 }
 
-double* FiniteElement::calculate_local_f()
+void FiniteElement::calculate_local_f()
 {
-
+    for (int i = 0; i < 4; ++i)
+        this->local_f[i] = 0;
 }
 
 double FiniteElement::calculate_volume()
@@ -39,6 +76,13 @@ double FiniteElement::calculate_volume()
         + v[0][2] * (v[1][0] * v[2][1] - v[1][1] * v[2][0])) / 6.;
 }
 
+bool FiniteElement::FiniteElementWithNode(int node_id)
+{
+    if (Node::GetNode(this->nodes, node_id) != NULL)
+        return true;
+    else
+        return false;
+}
 
 void FiniteElement::Print()
 {

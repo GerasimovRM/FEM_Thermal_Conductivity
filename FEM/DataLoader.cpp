@@ -27,10 +27,10 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         {
             in >> FiniteElements[i].element_id >> NodeId1 >> NodeId2 >> NodeId3 >> NodeId4;
             FiniteElements[i].nodes.resize(4);
-            FiniteElements[i].nodes[0] = Node::GetNode(Nodes, NodeId1);
-            FiniteElements[i].nodes[1] = Node::GetNode(Nodes, NodeId2);
-            FiniteElements[i].nodes[2] = Node::GetNode(Nodes, NodeId3);
-            FiniteElements[i].nodes[3] = Node::GetNode(Nodes, NodeId4);
+            FiniteElements[i].nodes[0] = *Node::GetNode(Nodes, NodeId1);
+            FiniteElements[i].nodes[1] = *Node::GetNode(Nodes, NodeId2);
+            FiniteElements[i].nodes[2] = *Node::GetNode(Nodes, NodeId3);
+            FiniteElements[i].nodes[3] = *Node::GetNode(Nodes, NodeId4);
         }
     }
     in.close();

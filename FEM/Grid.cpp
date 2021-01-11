@@ -1,5 +1,9 @@
+#include <vector>
+
 #include "Grid.h"
 #include "GlobalData.h"
+#include "FiniteElement.h"
+#include "Node.h"
 
 Grid::Grid(std::vector<FiniteElement> elements)
 {
@@ -32,6 +36,15 @@ Grid::Grid(std::vector<FiniteElement> elements)
 
 void Grid::calculate_global_C()
 {
-    //for (int k = 0; k < this->elements.size(); ++k)
-        //for (int j = 0; j < )
+    for (int i = 0; i < GlobalData::count_nodes; ++i)
+        for (int j = i + 1; j < GlobalData::count_nodes;  ++j)
+        {
+            // находим все элементы с парой ребер i j
+            std::vector<FiniteElement> elements;
+            for (auto element : this->elements)
+                if (element.FiniteElementWithNode(i) && element.FiniteElementWithNode(j))
+                    elements.push_back(element);
+
+        }
 }
+
