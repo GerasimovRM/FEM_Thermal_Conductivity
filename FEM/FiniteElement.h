@@ -5,8 +5,9 @@
 #pragma once
 class FiniteElement
 {
+public:
     std::vector<Node> nodes;
-    int id_element;
+    int element_id;
 
     std::vector<std::vector<double>> local_A;
     std::vector<std::vector<double>> local_B;

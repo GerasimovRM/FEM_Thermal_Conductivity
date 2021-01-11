@@ -10,3 +10,17 @@ Node::Node(int node_id, double temperature, double x, double y, double z)
 }
 
 Node::Node() {}
+
+Node Node::GetNode(std::vector<Node> Nodes, int NodeId)
+{
+    Node result;
+    for (Node node : Nodes)
+    {
+        if (node.node_id == NodeId)
+        {
+            result = node;
+            break;
+        }
+    }
+    return result;
+}

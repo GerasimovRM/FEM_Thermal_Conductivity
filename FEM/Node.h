@@ -1,3 +1,5 @@
+#include <vector>
+
 #pragma once
 class Node
 {
@@ -10,4 +12,5 @@ public:
 
     Node(int, double, double, double, double);
     Node();
+    static Node GetNode(std::vector<Node>, int);
 };
