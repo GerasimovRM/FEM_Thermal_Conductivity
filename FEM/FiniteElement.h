@@ -12,6 +12,5 @@ class FiniteElement
     std::vector<std::vector<double>> local_B;
     std::vector<double> local_f;
 
-    //void calculate_
-};
+};  
 
