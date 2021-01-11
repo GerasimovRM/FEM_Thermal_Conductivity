@@ -5,6 +5,7 @@
 #include "Node.h"
 #include "FiniteElement.h"
 #include "DataLoader.h"
+#include "Common.h"
 
 int main()
 {

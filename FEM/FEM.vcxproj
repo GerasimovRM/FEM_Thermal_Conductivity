@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="DataLoader.cpp" />
     <ClCompile Include="FEM.cpp" />
     <ClCompile Include="FiniteElement.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Common.h" />
     <ClInclude Include="DataLoader.h" />
     <ClInclude Include="FiniteElement.h" />
     <ClInclude Include="GlobalData.h" />

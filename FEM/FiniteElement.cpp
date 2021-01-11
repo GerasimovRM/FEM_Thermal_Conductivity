@@ -1,6 +1,24 @@
 #include <iostream>
 
 #include "FiniteElement.h"
+#include "GlobalData.h"
+
+/*
+std::vector<std::vector<double>> FiniteElement::calculate_local_A()
+{
+    or()
+}
+
+std::vector<std::vector<double>> FiniteElement::calculate_local_B()
+{
+
+}
+
+std::vector<double> FiniteElement::calculate_local_f()
+{
+
+}
+*/
 
 void FiniteElement::Print()
 {
