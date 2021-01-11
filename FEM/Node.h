@@ -12,5 +12,8 @@ public:
 
     Node(int, double, double, double, double);
     Node();
+    void Print();
+
     static Node GetNode(std::vector<Node>, int);
+    static void PrintNodes(std::vector<Node>);
 };

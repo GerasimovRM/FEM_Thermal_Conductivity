@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <iostream>
 
 #include "DataLoader.h"
 #include "Node.h"
@@ -13,6 +14,7 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
     if (in.is_open())
     {
         in >> NodeNumber;
+        std::cout << NodeNumber << std::endl;
         Nodes.resize(NodeNumber);
         for (int i = 0; i < NodeNumber; i++)
         {
@@ -20,7 +22,7 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         }
 
         in >> FiniteElementNumber;
-        Nodes.resize(FiniteElementNumber);
+        FiniteElements.resize(FiniteElementNumber);
         for (int i = 0; i < FiniteElementNumber; i++)
         {
             in >> FiniteElements[i].element_id >> NodeId1 >> NodeId2 >> NodeId3 >> NodeId4;

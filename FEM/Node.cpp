@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Node.h"
 
 Node::Node(int node_id, double temperature, double x, double y, double z)
@@ -23,4 +25,21 @@ Node Node::GetNode(std::vector<Node> Nodes, int NodeId)
         }
     }
     return result;
+}
+
+void Node::Print()
+{
+    std::cout << "Node: ================================\n";
+    std::cout << "Id:" << this->node_id << std::endl;
+    std::cout << "Position X:" << this->x << std::endl;
+    std::cout << "Position Y:" << this->y << std::endl;
+    std::cout << "Position Z:" << this->z << std::endl;
+    std::cout << "Temperature" << this->temperature << std::endl;
+    std::cout << "======================================\n";
+}
+
+void Node::PrintNodes(std::vector<Node> Nodes)
+{
+    for (auto node : Nodes)
+        node.Print();
 }
