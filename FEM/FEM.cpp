@@ -12,7 +12,5 @@ int main()
 
     std::vector<Node> Nodes;
     std::vector <FiniteElement> FiniteElements;
-    DataLoader DLoader();
-    DLoader.load_nodes_and_elements("temp_model.k", Nodes, FiniteElements);
-    
+    DataLoader::load_nodes_and_elements("temp_model.k", Nodes, FiniteElements);
 }

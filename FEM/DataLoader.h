@@ -8,6 +8,6 @@
 class DataLoader
 {
 public:
-    void load_nodes_and_elements(std::string, std::vector<Node>&, std::vector<FiniteElement>&);
+    static void load_nodes_and_elements(std::string, std::vector<Node>&, std::vector<FiniteElement>&);
 };
 
