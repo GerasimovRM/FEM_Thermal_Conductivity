@@ -4,7 +4,10 @@ class Node
 public:
     int node_id;
     double temperature;
+    double x;
+    double y;
+    double z;
 
-    Node(int node_id, double temperature);
+    Node(int, double, double, double, double);
     Node();
 };
