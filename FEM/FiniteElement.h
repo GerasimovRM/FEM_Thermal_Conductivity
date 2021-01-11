@@ -1,4 +1,5 @@
 #include <vector>
+
 #include "Node.h"
 #include "GlobalData.h"
 
@@ -12,6 +13,10 @@ public:
     std::vector<std::vector<double>> local_A;
     std::vector<std::vector<double>> local_B;
     std::vector<double> local_f;
+
+    void Print();
+
+    static void PrintElements(std::vector<FiniteElement>);
 
 };  
 

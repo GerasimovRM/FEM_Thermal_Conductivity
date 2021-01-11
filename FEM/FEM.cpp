@@ -14,4 +14,5 @@ int main()
     std::vector <FiniteElement> FiniteElements;
     DataLoader::load_nodes_and_elements("data.txt", Nodes, FiniteElements);
     Node::PrintNodes(Nodes);
+    FiniteElement::PrintElements(FiniteElements);
 }

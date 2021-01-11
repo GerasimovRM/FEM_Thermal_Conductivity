@@ -16,14 +16,14 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         in >> NodeNumber;
         std::cout << NodeNumber << std::endl;
         Nodes.resize(NodeNumber);
-        for (int i = 0; i < NodeNumber; i++)
+        for (int i = 0; i < NodeNumber; ++i)
         {
             in >> Nodes[i].node_id >> Nodes[i].x >> Nodes[i].y >> Nodes[i].z;
         }
 
         in >> FiniteElementNumber;
         FiniteElements.resize(FiniteElementNumber);
-        for (int i = 0; i < FiniteElementNumber; i++)
+        for (int i = 0; i < FiniteElementNumber; ++i)
         {
             in >> FiniteElements[i].element_id >> NodeId1 >> NodeId2 >> NodeId3 >> NodeId4;
             FiniteElements[i].nodes.resize(4);
