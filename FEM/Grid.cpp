@@ -8,7 +8,6 @@
 Grid::Grid(std::vector<FiniteElement> elements)
 {
     this->elements = elements;
-    
 
     this->global_C.resize(GlobalData::count_nodes);
     for (int i = 0; i < this->global_C.size(); ++i)

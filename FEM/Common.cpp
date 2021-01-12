@@ -72,7 +72,8 @@ void Common::matrix_print(double** matrix, int n, int m)
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < m; ++j)
-            std::cout << matrix[i][j] << ' ';
+            std::cout << matrix[i][j] << "\t";
         std::cout << std::endl;
     }
+    std::cout << std::endl; std::cout << std::endl;
 }

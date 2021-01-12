@@ -55,11 +55,11 @@ void FiniteElement::calculate_local_K()
     double** B_trans = Common::matrix_transpose(B, 3, 4);
     double** B_trans_D = Common::matrix_product(B_trans, 4, 3, GlobalData::lambda, 3, 3);
     this->local_K = Common::matrix_product(B_trans_D, 4, 3, B, 3, 4);
-
 }
 
 void FiniteElement::calculate_local_f()
 {
+    this->local_f = new double[4];
     for (int i = 0; i < 4; ++i)
         this->local_f[i] = 0;
 }
