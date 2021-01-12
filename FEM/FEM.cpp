@@ -17,5 +17,5 @@ int main()
     DataLoader::load_nodes_and_elements("data.txt", Nodes, FiniteElements);
     Node::PrintNodes(Nodes);
     FiniteElement::PrintElements(FiniteElements);
-    Grid grid(FiniteElements);
+    //Grid grid(FiniteElements);
 }

@@ -36,7 +36,12 @@ Grid::Grid(std::vector<FiniteElement> elements)
 
 void Grid::calculate_global_C()
 {
-    for (int i = 0; i < GlobalData::count_nodes; ++i)
+    for (auto element : this->elements)
+        for (int i = 0; i < 4; ++i)
+            for (int j = 0; j < 4; ++j)
+                global_C[element.nodes[i].node_id][element.nodes[j].node_id] += element.local_C[i][j];
+        
+    /*for (int i = 0; i < GlobalData::count_nodes; ++i)
         for (int j = i + 1; j < GlobalData::count_nodes;  ++j)
         {
             // находим все элементы с парой ребер i j
@@ -46,5 +51,21 @@ void Grid::calculate_global_C()
                     elements.push_back(element);
 
         }
+    */
 }
+
+void Grid::calculate_global_K()
+{
+    for (auto element : this->elements)
+        for (int i = 0; i < 4; ++i)
+            for (int j = 0; j < 4; ++j)
+                global_K[element.nodes[i].node_id][element.nodes[j].node_id] += element.local_K[i][j];
+}
+
+void Grid::calculate_global_f()
+{
+
+}
+
+
 
