@@ -30,8 +30,8 @@ GlobalData::GlobalData()
     count_steps = 10;
     init_temperature = 300;
     ambient_temperature = 500;
-    c = 700;
-    rho = 7800;
+    c = 30;
+    rho = 20;
 
     /*
     count_x_nodes = 3;

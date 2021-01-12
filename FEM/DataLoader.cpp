@@ -22,7 +22,9 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         for (int i = 0; i < NodeNumber; ++i)
         {
             in >> Nodes[i].node_id >> Nodes[i].x >> Nodes[i].y >> Nodes[i].z;
+            Nodes[i].temperature = GlobalData::init_temperature;
         }
+        
 
         in >> FiniteElementNumber;
         GlobalData::count_elements = FiniteElementNumber;

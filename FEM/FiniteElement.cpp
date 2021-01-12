@@ -27,6 +27,7 @@ void FiniteElement::calculate_local_C()
     }
     std::cout << "Volume: " << volume << std::endl;
     this->Print();
+    std::cout << "Local C: " << std::endl;
     Common::matrix_print(local_C, 4, 4);
 
 }
@@ -63,6 +64,10 @@ void FiniteElement::calculate_local_K()
     double** B_trans = Common::matrix_transpose(B, 3, 4);
     double** B_trans_D = Common::matrix_product(B_trans, 4, 3, GlobalData::lambda, 3, 3);
     this->local_K = Common::matrix_product(B_trans_D, 4, 3, B, 3, 4);
+
+    std::cout << "Local K: " << std::endl;
+    Common::matrix_print(local_K, 4, 4);
+    std::cout << std::endl << std::endl;
 }
 
 void FiniteElement::calculate_local_f()
