@@ -72,7 +72,19 @@ void Common::matrix_print(double** matrix, int n, int m)
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < m; ++j)
-            std::cout << matrix[i][j] << "\t";
+            std::cout << matrix[i][j] << "\t ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl; std::cout << std::endl;
+}
+
+void Common::vector_print(std::vector<std::vector<double>> vec)
+{
+    for (auto v : vec)
+    {
+        // std::cout << v.size() << std::endl;
+        for (auto elem : v)
+            std::cout << elem << "\t ";
         std::cout << std::endl;
     }
     std::cout << std::endl; std::cout << std::endl;

@@ -11,5 +11,6 @@ public:
     static double** matrix_product(double**, int, int, double**, int, int);
     static double** matrix_transpose(double**, int, int);
     static void matrix_print(double**, int, int);
+    static void vector_print(std::vector<std::vector<double>>);
 };
 

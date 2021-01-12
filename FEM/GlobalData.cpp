@@ -33,6 +33,7 @@ GlobalData::GlobalData()
     c = 700;
     rho = 7800;
 
+    /*
     count_x_nodes = 3;
     count_y_nodes = 3;
     count_z_nodes = 3;
@@ -47,6 +48,7 @@ GlobalData::GlobalData()
     count_y_elements = count_y_elements * 2;
     count_z_elements = count_z_elements * 2;
     count_elements = count_elements_sq * 2;
+    */
 
     lambda = new double* [3];
     for (int i = 0; i < 3; ++i)

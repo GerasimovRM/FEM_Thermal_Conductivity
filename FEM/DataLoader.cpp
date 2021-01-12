@@ -4,6 +4,8 @@
 
 #include "DataLoader.h"
 #include "Node.h"
+#include "GlobalData.h"
+
 
 void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Node>& Nodes, std::vector<FiniteElement>& FiniteElements)
 {
@@ -14,6 +16,7 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
     if (in.is_open())
     {
         in >> NodeNumber;
+        GlobalData::count_nodes = NodeNumber;
         std::cout << NodeNumber << std::endl;
         Nodes.resize(NodeNumber);
         for (int i = 0; i < NodeNumber; ++i)
@@ -22,6 +25,7 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         }
 
         in >> FiniteElementNumber;
+        GlobalData::count_elements = FiniteElementNumber;
         FiniteElements.resize(FiniteElementNumber);
         for (int i = 0; i < FiniteElementNumber; ++i)
         {
