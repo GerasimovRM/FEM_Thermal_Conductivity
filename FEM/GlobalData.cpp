@@ -27,7 +27,7 @@ double** GlobalData::lambda;
 GlobalData::GlobalData()
 {
     time_step = 0.01;
-    count_steps = 10;
+    count_steps = 100;
     init_temperature = 300;
     ambient_temperature = 500;
     c = 30;

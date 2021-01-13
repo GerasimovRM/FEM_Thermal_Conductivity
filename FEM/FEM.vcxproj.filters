@@ -61,5 +61,8 @@
     <Text Include="data.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="big_data.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>
