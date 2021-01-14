@@ -26,12 +26,12 @@ double** GlobalData::lambda;
 
 GlobalData::GlobalData()
 {
-    time_step = 1e-10;
+    time_step = 1e-5;
     count_steps = 100;
     init_temperature = 300;
     ambient_temperature = 500;
-    c = 30;
-    rho = 20;
+    c = 300;
+    rho = 2000;
 
     /*
     count_x_nodes = 3;
