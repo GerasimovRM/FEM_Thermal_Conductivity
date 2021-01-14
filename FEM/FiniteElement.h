@@ -14,9 +14,9 @@ public:
     double** local_K = NULL;
     double* local_f = NULL;
 
-    void calculate_local_C();
-    void calculate_local_K();
-    void calculate_local_f();
+    void calculate_local_C(bool = false);
+    void calculate_local_K(bool = false);
+    void calculate_local_f(bool = false);
     double calculate_volume();
     bool FiniteElementWithNode(int);
     void Print();

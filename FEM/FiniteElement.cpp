@@ -6,7 +6,7 @@
 #include "Common.h"
 
 
-void FiniteElement::calculate_local_C()
+void FiniteElement::calculate_local_C(bool show)
 {
     double volume = this->calculate_volume();
 
@@ -25,15 +25,18 @@ void FiniteElement::calculate_local_C()
                 local_C[i][j] *= 2;
         }
     }
-    std::cout << "Volume: " << volume << std::endl;
-    this->Print();
-    std::cout << "Local C: " << std::endl;
-    Common::matrix_print(local_C, 4, 4);
+    if (show)
+    {
+        std::cout << "Volume: " << volume << std::endl;
+        this->Print();
+        std::cout << "Local C: " << std::endl;
+        Common::matrix_print(local_C, 4, 4);
+    }
 
 }
 
 
-void FiniteElement::calculate_local_K()
+void FiniteElement::calculate_local_K(bool show)
 {
     double volume = this->calculate_volume();
 
@@ -64,13 +67,15 @@ void FiniteElement::calculate_local_K()
     double** B_trans = Common::matrix_transpose(B, 3, 4);
     double** B_trans_D = Common::matrix_product(B_trans, 4, 3, GlobalData::lambda, 3, 3);
     this->local_K = Common::matrix_product(B_trans_D, 4, 3, B, 3, 4);
-
-    std::cout << "Local K: " << std::endl;
-    Common::matrix_print(local_K, 4, 4);
-    std::cout << std::endl << std::endl;
+    if (show)
+    {
+        std::cout << "Local K: " << std::endl;
+        Common::matrix_print(local_K, 4, 4);
+        std::cout << std::endl << std::endl;
+    }
 }
 
-void FiniteElement::calculate_local_f()
+void FiniteElement::calculate_local_f(bool show)
 {
     this->local_f = new double[4];
     for (int i = 0; i < 4; ++i)

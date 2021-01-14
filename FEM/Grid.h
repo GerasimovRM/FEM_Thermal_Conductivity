@@ -13,6 +13,6 @@ public:
     Grid(std::vector<FiniteElement> elements);
     void calculate_global_C();
     void calculate_global_K();
-    void calculate_global_f();
+    void calculate_global_f(std::vector<int>);
 };
 

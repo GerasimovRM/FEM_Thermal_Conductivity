@@ -49,9 +49,18 @@ void Grid::calculate_global_K()
                 global_K[element.nodes[i].node_id][element.nodes[j].node_id] += element.local_K[i][j];
 }
 
-void Grid::calculate_global_f()
+void Grid::calculate_global_f(std::vector<int> NodesIdAmbient)
 {
-    for (int i = 0; i < this->elements.
+    global_f.resize(GlobalData::count_nodes);
+    for (int i = 0; i < GlobalData::count_nodes; ++i)
+    {
+        global_f[i] = 0;
+    }
+
+    for (auto node_id : NodesIdAmbient)
+    {
+        global_f[node_id] = GlobalData::ambient_temperature;
+    }
 }
 
 

@@ -13,9 +13,10 @@ int main()
     GlobalData();
 
     std::vector<Node> Nodes;
+    std::vector<int> NodesIdAmbient;
     std::vector<FiniteElement> FiniteElements;
-    DataLoader::load_nodes_and_elements("data.txt", Nodes, FiniteElements);
-    //Node::PrintNodes(Nodes);
+    DataLoader::load_nodes_and_elements("big_data.txt", Nodes, FiniteElements, NodesIdAmbient);
+    Node::PrintNodes(Nodes);
     //FiniteElement::PrintElements(FiniteElements);
     Grid grid(FiniteElements);
     //Common::vector_print(grid.global_C);
@@ -25,14 +26,14 @@ int main()
     {
         grid.elements[i].calculate_local_C();
         grid.elements[i].calculate_local_K();
-        grid.elements[i].calculate_local_f();
+
     }
     grid.calculate_global_C();
     grid.calculate_global_K();
-    grid.calculate_global_f();
-    Common::vector_print(grid.global_C);
-    Common::vector_print(grid.global_K);
-
+    grid.calculate_global_f(NodesIdAmbient);
+    //Common::vector_print(grid.global_C);
+    //Common::vector_print(grid.global_K);
+    /*
     for (int k = 0; k < GlobalData::count_steps; ++k)
     {
         for (int i = 0; i < Nodes.size(); ++i)
@@ -43,9 +44,44 @@ int main()
             Nodes[i].temperature += GlobalData::time_step / grid.global_C[i][i] * tmp;
         }
     }
+    */
+    double** left = Common::vector_to_array(grid.global_C);
+    //Common::matrix_print(left, GlobalData::count_nodes, GlobalData::count_nodes);
 
-    for (int i = 0; i < Nodes.size(); ++i)
-    {
-        std::cout << Nodes[i].temperature << std::endl;
-    }
+    double* right = Common::vector_to_array(grid.global_f);
+    //Common::array_print(right, GlobalData::count_nodes);
+
+    double* temperature = new double[GlobalData::count_nodes];
+    for (int i = 0; i < GlobalData::count_nodes; ++i)
+        temperature[i] = Nodes[i].temperature;
+    //Common::array_print(temperature, GlobalData::count_nodes);
+
+    double* K_temperature = Common::matrix_product(
+        Common::vector_to_array(grid.global_K),
+        GlobalData::count_nodes,
+        GlobalData::count_nodes,
+        temperature,
+        GlobalData::count_nodes);
+    //Common::array_print(K_temperature, GlobalData::count_nodes);
+
+    double* C_temperature = Common::matrix_product(
+        Common::vector_to_array(grid.global_C),
+        GlobalData::count_nodes,
+        GlobalData::count_nodes,
+        temperature,
+        GlobalData::count_nodes);
+    //Common::array_print(C_temperature, GlobalData::count_nodes);
+
+    right = Common::array_minus_array(right, K_temperature, GlobalData::count_nodes);
+    //Common::array_print(right, GlobalData::count_nodes);
+
+    right = Common::array_product_number(right, GlobalData::count_nodes, GlobalData::time_step);
+    //Common::array_print(right, GlobalData::count_nodes);
+
+    right = Common::array_plus_array(right, C_temperature, GlobalData::count_nodes);
+    //Common::array_print(right, GlobalData::count_nodes);
+
+    double* result = Common::gauss(left, right, GlobalData::count_nodes);
+    Common::array_print(result, GlobalData::count_nodes);
+
 }

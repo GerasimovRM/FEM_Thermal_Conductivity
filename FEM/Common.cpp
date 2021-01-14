@@ -55,6 +55,23 @@ double** Common::matrix_product(double** firstMatrix, int rowFirst, int columnFi
     return result;
 }
 
+double* Common::matrix_product(double** firstMatrix, int rowFirst, int columnFirst, double* secondMatrix, int rowSecond)
+{
+    double* result = new double[rowFirst];
+    for (int i = 0; i < rowFirst; ++i)
+    {
+        result[i] = 0.;
+    }
+
+    int i, k;
+
+    for (i = 0; i < rowFirst; ++i)
+        for (k = 0; k < columnFirst; ++k)
+            result[i] += firstMatrix[i][k] * secondMatrix[k];
+
+    return result;
+}
+
 double** Common::matrix_transpose(double** matrix, int n, int m)
 {
     double** result = new double* [m];
@@ -65,6 +82,48 @@ double** Common::matrix_transpose(double** matrix, int n, int m)
             result[i][j] = matrix[j][i];
     }
     return result;
+}
+
+double* Common::array_plus_array(double* arr1, double* arr2, int n)
+{
+    double* result = new double[n];
+    for (int i = 0; i < n; ++i)
+    {
+        result[i] = arr1[i] + arr2[i];
+    }
+    return result;
+}
+
+double* Common::array_minus_array(double* arr1, double* arr2, int n)
+{
+    double* result = new double[n];
+    for (int i = 0; i < n; ++i)
+    {
+        result[i] = arr1[i] - arr2[i];
+    }
+    return result;
+}
+
+double* Common::array_product_number(double* arr, int n, double number)
+{
+    double* result = new double[n];
+    for (int i = 0; i < n; ++i)
+    {
+        result[i] = arr[i] * number;
+    }
+    return result;
+}
+
+void Common::array_print(double* arr, int n)
+{
+    for (int i = 0; i < n; ++i)
+        std::cout << arr[i] << std::endl;
+}
+
+void Common::vector_print(std::vector<double> vec)
+{
+    for (int i = 0; i < vec.size(); ++i)
+        std::cout << vec[i] << std::endl;
 }
 
 void Common::matrix_print(double** matrix, int n, int m)
