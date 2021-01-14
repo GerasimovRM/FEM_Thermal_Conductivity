@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
+#include <fstream>
 
 #include "GlobalData.h"
 #include "Node.h"
@@ -83,5 +84,11 @@ int main()
 
     double* result = Common::gauss(left, right, GlobalData::count_nodes);
     Common::array_print(result, GlobalData::count_nodes);
-
+    // числоа частиц
+    // id x y z temp
+    std::ofstream out_file("dump.txt");
+    out_file << GlobalData::count_nodes << std::endl;
+    for (int i = 0; i < GlobalData::count_nodes; ++i)
+        out_file << Nodes[i].x << "\t" << Nodes[i].y << "\t" << Nodes[i].z << "\t" << Nodes[i].temperature << "\n";
+    out_file.close();
 }
