@@ -51,7 +51,7 @@ void Grid::calculate_global_K()
 
 void Grid::calculate_global_f()
 {
-
+    for (int i = 0; i < this->elements.
 }
 
 

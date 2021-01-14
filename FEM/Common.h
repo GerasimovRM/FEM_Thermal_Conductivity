@@ -12,5 +12,6 @@ public:
     static double** matrix_transpose(double**, int, int);
     static void matrix_print(double**, int, int);
     static void vector_print(std::vector<std::vector<double>>);
+    static double* gauss(double**, double*, int);
 };
 

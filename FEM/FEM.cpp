@@ -29,7 +29,7 @@ int main()
     }
     grid.calculate_global_C();
     grid.calculate_global_K();
-    //grid.calculate_global_f();
+    grid.calculate_global_f();
     Common::vector_print(grid.global_C);
     Common::vector_print(grid.global_K);
 
