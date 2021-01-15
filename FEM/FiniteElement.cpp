@@ -8,23 +8,49 @@
 
 void FiniteElement::calculate_local_C(bool show)
 {
-    double volume = this->calculate_volume();
-
     if (this->local_C == NULL)
     {
         this->local_C = new double* [4];
         for (int i = 0; i < 4; ++i)
             local_C[i] = new double [4];
     }
+
+    double volume = this->calculate_volume();
+
+    double b0 = (nodes[1].y - nodes[3].y) * (nodes[2].z - nodes[3].z) - (nodes[2].y - nodes[3].y) * (nodes[1].z - nodes[3].z);
+    double b1 = (nodes[2].y - nodes[3].y) * (nodes[0].z - nodes[3].z) - (nodes[0].y - nodes[3].y) * (nodes[2].z - nodes[3].z);
+    double b2 = (nodes[0].y - nodes[3].y) * (nodes[1].z - nodes[3].z) - (nodes[1].y - nodes[3].y) * (nodes[0].z - nodes[3].z);
+    double b3 = b0 + b1 + b2;
+
+    double c0 = (nodes[2].x - nodes[3].x) * (nodes[1].z - nodes[3].z) - (nodes[1].x - nodes[3].x) * (nodes[2].z - nodes[3].z);
+    double c1 = (nodes[0].x - nodes[3].x) * (nodes[2].z - nodes[3].z) - (nodes[2].x - nodes[3].x) * (nodes[0].z - nodes[3].z);
+    double c2 = (nodes[1].x - nodes[3].x) * (nodes[0].z - nodes[3].z) - (nodes[0].x - nodes[3].x) * (nodes[1].z - nodes[3].z);
+    double c3 = -(c0 + c1 + c2);
+
+    double d0 = (nodes[1].x - nodes[3].x) * (nodes[2].y - nodes[3].y) - (nodes[2].x - nodes[3].x) * (nodes[2].y - nodes[3].y);
+    double d1 = (nodes[2].x - nodes[3].x) * (nodes[0].y - nodes[3].y) - (nodes[0].x - nodes[3].x) * (nodes[2].y - nodes[3].y);
+    double d2 = (nodes[0].x - nodes[3].x) * (nodes[1].y - nodes[3].y) - (nodes[1].x - nodes[3].x) * (nodes[0].y - nodes[3].y);
+    double d3 = -(d0 + d1 + d2);
+
+    double a0 = 6 * volume - (b0 * nodes[0].x + c0 * nodes[0].y + d0 * nodes[0].z);
+    double a1 = 6 * volume - (b1 * nodes[1].x + c1 * nodes[1].y + d0 * nodes[1].z);
+    double a2 = 6 * volume - (b2 * nodes[2].x + c2 * nodes[2].y + d0 * nodes[2].z);
+    double a3 = 6 * volume - (b3 * nodes[3].x + c3 * nodes[3].y + d0 * nodes[3].z);
+
+    double* N = new double[4];
+    N[0] = 1 / (6 * volume) * (a0 + b0 * nodes[0].x + c0 * nodes[0].y + d0 * nodes[0].z);
+    N[1] = 1 / (6 * volume) * (a1 + b1 * nodes[1].x + c1 * nodes[1].y + d1 * nodes[1].z);
+    N[2] = 1 / (6 * volume) * (a2 + b2 * nodes[2].x + c2 * nodes[2].y + d2 * nodes[2].z);
+    N[3] = 1 / (6 * volume) * (a3 + b3 * nodes[3].x + c3 * nodes[3].y + d3 * nodes[3].z);
+
     for (int i = 0; i < 4; ++i)
     {
         for (int j = 0; j < 4; ++j)
         {
-            local_C[i][j] = GlobalData::c * GlobalData::rho * volume / 20.;
-            if (i == j)
-                local_C[i][j] *= 2;
+            local_C[i][j] = GlobalData::c * GlobalData::rho * N[i] * N[j];
         }
     }
+
     if (show)
     {
         std::cout << "Volume: " << volume << std::endl;

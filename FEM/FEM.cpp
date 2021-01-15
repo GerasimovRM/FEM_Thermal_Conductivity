@@ -45,15 +45,15 @@ int main()
         {
             double tmp = 0;
             for (int j = 0; j < Nodes.size(); ++j)
-                tmp = grid.global_K[i][j] * Nodes[i].temperature;
+                tmp = grid.global_f[i] - grid.global_K[i][j] * Nodes[i].temperature;
             Nodes[i].temperature += GlobalData::time_step / grid.global_C[i][i] * tmp;
             out_file << Nodes[i].node_id << "\t" << Nodes[i].x << "\t" << Nodes[i].y << "\t" << Nodes[i].z << "\t" << Nodes[i].temperature << "\n";
         }
     }
     
-    /*for (int step = 0; step < 10; ++step)
+    /*for (int step = 0; step < 100; ++step)
     {
-        /*for (int i = 0; i < grid.elements.size(); ++i)
+        for (int i = 0; i < grid.elements.size(); ++i)
         {
             grid.elements[i].calculate_local_C();
             grid.elements[i].calculate_local_K();

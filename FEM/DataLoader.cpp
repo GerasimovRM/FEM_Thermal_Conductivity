@@ -45,7 +45,7 @@ void DataLoader::load_nodes_and_elements(std::string input_file, std::vector<Nod
         {
             in >> node_id_ambient;
             NodesIdAmbient[i] = node_id_ambient;
-            //Nodes[node_id_ambient].temperature = GlobalData::ambient_temperature;
+            Nodes[node_id_ambient].temperature = GlobalData::ambient_temperature;
         }
     }
     in.close();

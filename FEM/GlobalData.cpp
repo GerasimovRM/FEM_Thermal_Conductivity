@@ -26,8 +26,8 @@ double** GlobalData::lambda;
 
 GlobalData::GlobalData()
 {
-    time_step = 1e-5;
-    count_steps = 100;
+    time_step = 1e-3;
+    count_steps = 10000;
     init_temperature = 300;
     ambient_temperature = 500;
     c = 300;
@@ -57,8 +57,8 @@ GlobalData::GlobalData()
         for (int j = 0; j < 3; ++j)
             lambda[i][j] = 0;
     }
-    lambda[0][0] = 10;
-    lambda[1][1] = 10;
-    lambda[2][2] = 10;
+    lambda[0][0] = 100;
+    lambda[1][1] = 100;
+    lambda[2][2] = 100;
 
 }

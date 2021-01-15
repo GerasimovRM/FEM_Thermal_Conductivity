@@ -67,5 +67,8 @@
     <Text Include="dump.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
+    <Text Include="data_one.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
   </ItemGroup>
 </Project>

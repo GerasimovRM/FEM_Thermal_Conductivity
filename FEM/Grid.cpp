@@ -56,12 +56,11 @@ void Grid::calculate_global_f(std::vector<int> NodesIdAmbient)
     {
         global_f[i] = 0;
     }
-    /*
+
     for (auto node_id : NodesIdAmbient)
     {
         global_f[node_id] = GlobalData::ambient_temperature;
     }
-    */
 }
 
 
